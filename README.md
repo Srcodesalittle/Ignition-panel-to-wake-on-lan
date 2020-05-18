@@ -97,8 +97,8 @@ To implement the ability to update wirelessly, simply note the hostname and pass
 The code for the most part is decently well commented and should be self explanatory. You will need to add two libraries to the IDE to enable all the required features. Do this by hitting Ctrl+Shift+I or navigate to Skethc>>Include libraries>> Manage libraries. 
 The first library you need is arduinojson. Simply type arduinojson into library manager and click install.
 ![library manager](https://i.imgur.com/agAoYgD.png)
-The second library you will need is the wake on lan library. **Do not search wake on lan in the manager, you will install the wrong library**. Instead, head [here](https://github.com/koenieee/WakeOnLan-ESP8266). Once you reach the github page, click on clone/download> then download as zip
-![download as zip](https://imgur.com/VX14qjN)
+The second library you will need is the wake on lan library. **Do not search wake on lan in the manager, you will install the wrong library**. Instead, head [here](https://github.com/koenieee/WakeOnLan-ESP8266). Once you reach the github page, click on clone/download> then download as zip 
+![download as zip](https://i.imgur.com/VX14qjN.png)
 
 Save your zip file somewhere, there is no need to unzip this file. 
 Next, navigate to Sketch>>Include library>> Add .Zip library
