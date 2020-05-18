@@ -25,7 +25,7 @@ I really don't want to make a table here, so bear with me and actually check out
 
 **Points to note in the items**
 1. You can get a soldering or plug and use soddering board depending on whether or not you want to solder everything together. If you do go the soldering route, you will need a soldering iron and some good solder. *Eye protection is probably a good idea as well*
-2. You will need an ethernet cable to execute the wake on lan, this wont work over wifi, I have tried. So the length of cable you need will depend on your house setup. If it's unfeasible, consider a ![powerline adapter](https://www.amazon.com/TP-Link-AV600-Powerline-Ethernet-Adapter/dp/B00AWRUICG).
+2. You will need an ethernet cable to execute the wake on lan, this wont work over wifi, I have tried. So the length of cable you need will depend on your house setup. If it's unfeasible, consider a [powerline adapter](https://www.amazon.com/TP-Link-AV600-Powerline-Ethernet-Adapter/dp/B00AWRUICG).
 
 ## The brains of the operation, the NodeMCU ESP8266 module:
 An ESP8266 is an IOT module which is similar to an arduino except it comes built in with wireless networking capabilities and operates on a 3.3V logic level as opposed to the arduino's 5V. The nodemcu board is an ESP8266 module with pinouts, and a USB input for easier acces/powering abilities. (I'm sure there's more to the board but that's really all I know). 
@@ -67,6 +67,7 @@ All of that to say - use ground resistors on your switches. They will save you a
 
 I chose these pins on the nodemcu board since not all pins are accessible for input output, some are reserved for clocks and such. Here is the pinout diagram
 ![pinout](https://cdn.instructables.com/FJC/J4AP/JH8JBTHA/FJCJ4APJH8JBTHA.LARGE.jpg)
+
 and a [link](https://www.instructables.com/id/NodeMCU-ESP8266-Details-and-Pinout/) to the pins you can and cannot use. 
 
 So go ahead and hook up your components as shown in the circuit diagram and we can move into programming this.
@@ -96,8 +97,9 @@ To implement the ability to update wirelessly, simply note the hostname and pass
 The code for the most part is decently well commented and should be self explanatory. You will need to add two libraries to the IDE to enable all the required features. Do this by hitting Ctrl+Shift+I or navigate to Skethc>>Include libraries>> Manage libraries. 
 The first library you need is arduinojson. Simply type arduinojson into library manager and click install.
 ![library manager](https://i.imgur.com/agAoYgD.png)
-The second library you will need is the wake on lan library. **Do not search wake on lan in the manager, you will install the wrong library**. Instead, head [here](https://github.com/koenieee/WakeOnLan-ESP8266). Once you reach the github page, click on clone/download> then download as zip. 
-https://imgur.com/VX14qjN
+The second library you will need is the wake on lan library. **Do not search wake on lan in the manager, you will install the wrong library**. Instead, head [here](https://github.com/koenieee/WakeOnLan-ESP8266). Once you reach the github page, click on clone/download> then download as zip
+![download as zip](https://imgur.com/VX14qjN)
+
 Save your zip file somewhere, there is no need to unzip this file. 
 Next, navigate to Sketch>>Include library>> Add .Zip library
 ![Path](https://i.imgur.com/HO1eIOX.png).
@@ -113,7 +115,7 @@ With our libraries installed, we are almost done. The code just needs credential
 ![wifi credentials](https://i.imgur.com/uXu9n4r.png)
 Hit the upload button. If you have chosen the port correctly, it should compile and beging uploading. The first time you compile may take time, be patient. 
 After uploading, your ESP8266 should be on the wifi. This can be tested by opening serial monitor: 
-![monitor] (https://i.imgur.com/jcNDv07.png).
+![monitor](https://i.imgur.com/jcNDv07.png).
 Set your baud rate to 115200 from the dropdown and then hit the reset button on your nodemcu board. You should see (maybe) a few .6s and then you should see the message 
 
 Connected to <your SSID>
@@ -151,7 +153,8 @@ Good luck! I hope it works out for you as well!
 The future work of this project involves ESP now to communicate with a slave ESP8266 inside the PC case to run LEDs and or sounds in response to the switches. Any parts of the code that are commented with ``// this is the sending part for ESP now if necessary.`` are regions that will be activated to send packets to the slave. As of now, these are not executed.
 
 ## acknowledgements
-[Jeremy blum](https://www.jeremyblum.com/) and his excellent [tutorial series](https://www.youtube.com/watch?v=fCxzA9_kg6s&list=PLA567CE235D39FA84) that helped me start with IoT.
-[Rui Santos](https://makeradvisor.com/author/ruisantos/) for ESP8266 tutorials
-[keoniee](https://github.com/koenieee) for wake on lan library and initial code.
-[Good ol' google-fu](https://www.google.com/)
+1. [Jeremy blum](https://www.jeremyblum.com/) and his excellent [tutorial series](https://www.youtube.com/watch?v=fCxzA9_kg6s&list=PLA567CE235D39FA84) that helped me start with IoT.
+2. [Rui Santos](https://makeradvisor.com/author/ruisantos/) for ESP8266 tutorials
+3. [keoniee](https://github.com/koenieee) for wake on lan library and initial code.
+4. [Good ol' google-fu](https://www.google.com/)
+5. Ya'll for reading!
