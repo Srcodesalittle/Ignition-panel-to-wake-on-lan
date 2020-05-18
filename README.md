@@ -6,7 +6,8 @@ I take no ownership of the components in the code, I found them online and cobbl
 The underlying logic is that a nodemcu ESP8266 module which is one of these ![nodemcu_esp8266](https://i0.wp.com/www.abstractotech.com/wp-content/uploads/2019/02/IMG_20190209_144805-2.jpg?resize=1024%2C773&ssl=1)
 
 
-The underlying logic is to take inputs from an ignition panel and on the final switch press, send a wake on lan packet to startup the PC.
+takes inputs from an ignition panel and on the final switch press, send a wake on lan packet to startup the PC.
+
 The ignition panel looks something like this ![igniton panel](https://i.imgur.com/HezUzRw.jpg)
 ![igniton panel2](https://i.imgur.com/JDkIAPW.jpg)
 you get the idea. It's for race cars, all the better for our end use. 
@@ -27,8 +28,11 @@ I really don't want to make a table here, so bear with me and actually check out
 2. You will need an ethernet cable to execute the wake on lan, this wont work over wifi, I have tried. So the length of cable you need will depend on your house setup. If it's unfeasible, consider a ![powerline adapter](https://www.amazon.com/TP-Link-AV600-Powerline-Ethernet-Adapter/dp/B00AWRUICG).
 
 ## The brains of the operation, the NodeMCU ESP8266 module:
-An ESP8266 is an IOT module which is similar to an arduino except it comes built in with wireless networking capabilities and operates on a 3.3V logic level as opposed to the arduino's 5V. The nodemcu board is an ESP8266 module with pinouts, and a USB input for easier acces/powering abilities. (I'm sure there's more to the board but that's really all I know). There's no reason this project wont work with the new ESP32 module as well. 
+An ESP8266 is an IOT module which is similar to an arduino except it comes built in with wireless networking capabilities and operates on a 3.3V logic level as opposed to the arduino's 5V. The nodemcu board is an ESP8266 module with pinouts, and a USB input for easier acces/powering abilities. (I'm sure there's more to the board but that's really all I know). 
 I refer to "pins" throughout this guide, if you're unaware of what a pin is, it's the pokey bits that come out of the chipset. Seen here looking like metal teeth ![metal pins](https://cdn.instructables.com/FNA/7UD5/JH8JBT8A/FNA7UD5JH8JBT8A.LARGE.jpg)
+
+They sit in the breadboard and allow access to the various input/outputs of the board. **If you're unsure of what a breadboard is**, give [this](https://www.youtube.com/watch?v=6WReFkfrUIk) a watch to learn how to use a breadboard. 
+People much smarter than I have created all sorts of useful functions for the ESP8266 including the ability to connect to wifi, send wake on lan packets, and communicate with other ESP8266 devices. We will use these three functions in this project. There's no reason this project wont work with the new ESP32 module as well. 
 
 ## Powering the ignition panel
 - The simplest way to power your box is using the microusb input on the board. This will take 5V and draw between 1-2A of current. So if you get any cheap powerbank you should be good to go. Plugging it into your PC's USB port while uploading code etc will also be enough to power the module and troublehsoot. 
@@ -53,6 +57,7 @@ Obviously there is very little you can get from those images, here is the circui
 3. LED1, 2, 3 are the LEDs underneath the toggle switches
 4. SW5 WOL_Button is the engine start button that functions to send the wake on lan signal.
 5. WOL_LED is the LED that lights up inside the start engine button.
+
 **Notes about wiring**
 The wiring is such that the only way to send the wake on lan signal is to flip all the preceeding switches in that particular order. They are all in series and powered by the previous switch. All the switches are also pulled down to ground using a 10K resistor. All this means is, the output of the switch is wired to the ESP8266 *and* the ground connection. This forces the switch to stay off unless it is explicitly set to on. **If you don't have these resistors, then really weird shit will happen** where the switches wont know if they're on or not. The actual explanation is that, the esp8266 works on very low currents, so low that, the electromagnetic induction produced in the wires from just random radiowaves, hands waving, etc will generate enough current for the pins to register an input and think that the switch is active. To avoid all these, we run the output to ground through a resistor so that any tiny charges that develop in the wires are all fed to ground. However, when the switch is properly activated, the current will rather flow down the path of least resistance to the chip and register an actual *active* state than force its way through a heavy 10K resistor to reach ground.
 All of that to say - use ground resistors on your switches. They will save you a lot of pain.
@@ -60,3 +65,18 @@ All of that to say - use ground resistors on your switches. They will save you a
 I chose these pins on the nodemcu board since not all pins are accessible for input output, some are reserved for clocks and such. Here is the pinout diagram
 ![pinout](https://cdn.instructables.com/FJC/J4AP/JH8JBTHA/FJCJ4APJH8JBTHA.LARGE.jpg)
 and a [link](https://www.instructables.com/id/NodeMCU-ESP8266-Details-and-Pinout/) to the pins you can and cannot use. 
+
+So go ahead and hook up your components as shown in the circuit diagram and we can move into programming this.
+
+## Programming the ESP8266 in the Arduino IDE
+To actually program the ESP8266 to do what we want, we need to write a program in a special environment known as the arduino IDE. This was initially designed for programming arduinos but the language is the same and it should work fine. 
+1. Download the IDE [here](https://www.arduino.cc/en/Main/Software) Hit just download or download and donate if you're feeling generous. Install the IDE once download completes.
+2. Next, open the application, you should see a blank window like this 
+![Fresh IDE install](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/Arduino%20IDE.PNG)
+3. Goto >> Files >> Preferences and paste following Link in "Additional board manager URLs http://arduino.esp8266.com/stable/package_esp8266com_index.json and hit OK. This tells the IDE that you are going to need specific instructions for the ESP8266.
+4. Now Goto >> Tools >> Board >> Board Manager.
+5. Scroll down to find ESP8266 and click on install. If not, type ESP8266 in the search bar and install ESP8266 by ESP8266 community. This will install the required files to begin working.
+6. Finally, Tools >> Board >>Node MCU 1.0 (ESP -12E Module). You are now good to go. 
+7. Plug in your nodemcu ESP8266 via USB and it should auto detect. This can be verified by navigating to Tools>>Port>> here you should see it on one of the coms. 
+8. Feel free to go to File>>Examples>>Esp8266>>Blink to load up a basic sketch(name of programs in this IDE) that makes the onboard LED blink on and off. Hit the right arrow button next to the checkmark button that says "Upload". The sketch  should compile, upload, and the onboard LED should flash on and off. If you get an error saying could not open port, you chose the wrong port. Simply go to Tools>>Port>> and choose a different port and try uploading again. 
+9. Bonafide ESP8266 programmer!
