@@ -1,2 +1,18 @@
 # Ignition-panel-to-wake-on-lan
-Ignition panel project to startup PC using wake on LAN.
+This project, is entirely to turn on a PC in a totally overkill fashion; nobody should make this, everybody should make this.
+Before we get into any of these, I don't pretend to be an expert on any of this at all, so I might not know everything I'm talking about but I will try my best to give you correct information!
+
+I take no ownership of the components in the code, I found them online and cobbled them together to make my program. Schematic file, bill of materials, and code are named appropriately.
+The underlying logic is that a nodemcu ESP8266 module which is one of these ![nodemcu_esp8266](https://i0.wp.com/www.abstractotech.com/wp-content/uploads/2019/02/IMG_20190209_144805-2.jpg?resize=1024%2C773&ssl=1)
+
+An ESP8266 is an IOT module which is similar to an arduino except it comes built in with wireless networking capabilities and operates on a 3.3V logic level as opposed to the arduino's 5V. The nodemcu board is an ESP8266 module with pinouts, and a USB input for easier acces/powering abilities. (I'm sure there's more to the board but that's really all I know). There's no reason this project wont work with the new ESP32 module as well. 
+
+The underlying logic is to take inputs from an ignition panel and on the final switch press, send a wake on lan packet to startup the PC.
+The ignition panel looks something like this ![igniton panel](https://i.imgur.com/HezUzRw.jpg)
+[igniton panel2](https://i.imgur.com/JDkIAPW.jpg)
+you get the idea. It's for race cars, all the better for our end use. 
+
+**A note on the ignition module:** 
+
+1. The ignition panel may claim to be 12V, but it's not strictly 12V. In my testing, none of the components need 12V to function, everything runs fine with just 3.3V, saving you the need for transistors and separate 12V power lanes.
+1. The lights in the module are just bulbs, not LEDs so they do work with 3.3V. Better yet, feel free to snip these off and solder on LEDs for even brighter lights.
