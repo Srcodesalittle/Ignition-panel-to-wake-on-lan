@@ -89,7 +89,7 @@ To actually program the ESP8266 to do what we want, we need to write a program i
 9. Bonafide ESP8266 programmer!
 
 ## The actual wake on lan code
-I have attached the code here with the name WOL_LED_SecOTA.ino. Download this and open it up. It should open up in the arduino IDE. Don't upload just yet, you need to give it your credentials. The name  ThisWOL_LED_SecOTA refers to the three main functions executed by the code:
+I have attached the code here with the name [WOL_LED_SecOTA.ino](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/WOL_LED_SecOTA.ino). Download this and open it up. It should open up in the arduino IDE. Don't upload just yet, you need to give it your credentials. The name  ThisWOL_LED_SecOTA refers to the three main functions executed by the code:
 
 1. The Wake on LAN which powers on your PC.
 2. The ability to control LEDs (or really whatever you want) by using a slave ESP8266 to respond to the switches being flipped. This is part of phase 2 of the project and will be updated in the future.
