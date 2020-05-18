@@ -1,7 +1,7 @@
 # Guide to start your PC like the battlestation it is!
 ## [Video of functioning panel here](https://i.imgur.com/bVzd4uq.mp4).
 
-## This project, is entirely to turn on your PC in a totally overkill fashion; nobody should make this, everybody should make this.
+## The sole purpose of this project to startup your PC in a totally overkill fashion; nobody should make this, everybody should make this.
 
 Before we get into any of these, I don't pretend to be an expert on any of this at all, so I might not know everything I'm talking about but I will try my best to give you correct information! I have a bunch of store links here, none of them are affiliate links or anything.
 
