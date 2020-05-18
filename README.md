@@ -1,4 +1,4 @@
-# Guide to start your PC like the battlestation it is!
+# Guide to power on your PC like the battlestation it is!
 ## [Video of functioning panel here](https://i.imgur.com/bVzd4uq.mp4).
 
 ## The sole purpose of this project to startup your PC in a totally overkill fashion; nobody should make this, everybody should make this.
