@@ -80,3 +80,16 @@ To actually program the ESP8266 to do what we want, we need to write a program i
 7. Plug in your nodemcu ESP8266 via USB and it should auto detect. This can be verified by navigating to Tools>>Port>> here you should see it on one of the coms. 
 8. Feel free to go to File>>Examples>>Esp8266>>Blink to load up a basic sketch(name of programs in this IDE) that makes the onboard LED blink on and off. Hit the right arrow button next to the checkmark button that says "Upload". The sketch  should compile, upload, and the onboard LED should flash on and off. If you get an error saying could not open port, you chose the wrong port. Simply go to Tools>>Port>> and choose a different port and try uploading again. 
 9. Bonafide ESP8266 programmer!
+
+## The actual wake on lan code
+I have attached the code here with the name WOL_LED_SecOTA.ino. Download this and open it up. It should open up in the arduino IDE. Don't upload just yet, you need to give it your credentials. The name  ThisWOL_LED_SecOTA refers to the three main functions executed by the code:
+
+1. The Wake on LAN which powers on your PC.
+2. The ability to control LEDs (or really whatever you want) by using a slave ESP8266 to respond to the switches being flipped. This is part of phase 2 of the project and will be updated in the future.
+3. SecOTA - This is secure over the air updates. Since you're going to be sealing your module inside the project box, it might be a pain to actually wire into it every time you want to update your code. So this module just adds the ability to update code wirelessly. 
+To implement the ability to update wirelessly, simply note the hostname and password you set and then upload the code. Once uploaded, reboot using the reset switch and now, even if you're powering your module using a battery pack, if you navigate to Tools>>Port>>  you should see the nodemcu module show up with the hostname you specified. Attempting to upload code will be met with a password prompt. **Make sure that whatever code you upload to this board in the future has the OTA code in it with the same hostname and password, if the OTA code is omitted, you will lose the ability to update over the air in the future.** 
+
+### Info you need to add to the code
+The code for the most part is decently well commented and should be self explanatory. You will need to add libraries to the code to enable all the required features. Do this by hitting Ctrl+Shift+I or navigate to Skethc>>Include libraries>> Manage libraries. 
+
+
