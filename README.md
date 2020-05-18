@@ -28,4 +28,6 @@ I really don't want to make a table here, so bear with me and actually check out
 2. You will need an ethernet cable to execute the wake on lan, this wont work over wifi, I have tried. So the length of cable you need will depend on your house setup. If it's unfeasible, consider a ![powerline adapter](https://www.amazon.com/TP-Link-AV600-Powerline-Ethernet-Adapter/dp/B00AWRUICG).
 
 ## The wiring
-Here's the glorious guts ![internal tangle of wiring]()
+Here's the glorious guts ![internal tangle of wiring](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/Back%20of%20panel.jpg)
+The wired up nodemcu on a soldering breadboard ![wired up board](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/Wiring%20with%20esp.jpg)
+and the battery pack with a push button micro usb cable. ![Battery pack+cable](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/battery%20pack.jpg)
