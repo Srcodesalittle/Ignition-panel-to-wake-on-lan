@@ -23,7 +23,7 @@ you get the idea. It's for race cars, all the better for our end use.
 
 ## Stuff you need
 These prices may vary but this is based on time of creation. 
-[Bill of materials here](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/Bill%20of%20materials.xlsx)
+[Bill of materials here](Final bill of materials.xlsx)
 I really don't want to make a table here, so bear with me and actually check out the excel file. 
 
 **Points to note in the items**
