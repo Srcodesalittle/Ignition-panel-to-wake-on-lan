@@ -35,7 +35,7 @@ They sit in the breadboard and allow access to the various input/outputs of the 
 People much smarter than I have created all sorts of useful functions for the ESP8266 including the ability to connect to wifi, send wake on lan packets, and communicate with other ESP8266 devices. We will use these three functions in this project. There's no reason this project wont work with the new ESP32 module as well. 
 
 ## If this is on WiFi, how secure is it?:
-A valid question. This code only creates a small server within your local network. It is not accessible by devices outside your network. It also, does not respond to any oustide inputs thus it is very secure. You can test this by trying to ping it through an external computer
+A valid question. This code only creates a small server within your local network. It is not accessible by devices outside your network. It also, does not respond to any oustide inputs thus it is very secure. You can test this by noting the IP address (described a few steps down) and trying to ping it through an external computer like a work computer. It should not respond. Also, if you keep the device powered off untill necessary, there is nothing to even connect to. 
 
 ## Powering the ignition panel
 - The simplest way to power your box is using the microusb input on the board. This will take 5V and draw between 1-2A of current. So if you get any cheap powerbank you should be good to go. Plugging it into your PC's USB port while uploading code etc will also be enough to power the module and troublehsoot. 
@@ -96,7 +96,7 @@ To implement the ability to update wirelessly, simply note the hostname and pass
 The code for the most part is decently well commented and should be self explanatory. You will need to add two libraries to the IDE to enable all the required features. Do this by hitting Ctrl+Shift+I or navigate to Skethc>>Include libraries>> Manage libraries. 
 The first library you need is arduinojson. Simply type arduinojson into library manager and click install.
 ![library manager](https://i.imgur.com/agAoYgD.png)
-The second library you will need is the wake on lan library. **Do not search wake on lan in the manager, you will install the wrong library**. Instead, head [here](https://github.com/koenieee/WakeOnLan-ESP8266). (Props to [koenieee](https://github.com/koenieee) for making this module). Once you reach the github page, click on clone/download> then download as zip. 
+The second library you will need is the wake on lan library. **Do not search wake on lan in the manager, you will install the wrong library**. Instead, head [here](https://github.com/koenieee/WakeOnLan-ESP8266). Once you reach the github page, click on clone/download> then download as zip. 
 https://imgur.com/VX14qjN
 Save your zip file somewhere, there is no need to unzip this file. 
 Next, navigate to Sketch>>Include library>> Add .Zip library
@@ -143,8 +143,15 @@ The order of operations is as follows:
 3. Turn on switch 1 - LED 1 should turn on and switch 2 is now powered.
 4. Turn on switch 2 - LED 2 should turn on and switch 3 is now powered.
 5. Turn on switch 3 - LED 3 and Start engine LEDs should turn on. Start engine aka Wake on lan button is now powered.
-6. Press Start engine button - Send the wake on LAN signal.
+6. Press Start engine button - Send the wake on LAN signal and hopefully turn on your PC.
+
+Good luck! I hope it works out for you as well!
 
 ## Future - what are these "This is the sending part comments"?
 The future work of this project involves ESP now to communicate with a slave ESP8266 inside the PC case to run LEDs and or sounds in response to the switches. Any parts of the code that are commented with ``// this is the sending part for ESP now if necessary.`` are regions that will be activated to send packets to the slave. As of now, these are not executed.
+
 ## acknowledgements
+[Jeremy blum](https://www.jeremyblum.com/) and his excellent [tutorial series](https://www.youtube.com/watch?v=fCxzA9_kg6s&list=PLA567CE235D39FA84) that helped me start with IoT.
+[Rui Santos](https://makeradvisor.com/author/ruisantos/) for ESP8266 tutorials
+[keoniee](https://github.com/koenieee) for wake on lan library and initial code.
+[Good ol' google-fu](https://www.google.com/)
