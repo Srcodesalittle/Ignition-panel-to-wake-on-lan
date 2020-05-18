@@ -8,8 +8,8 @@ The underlying logic is that a nodemcu ESP8266 module which is one of these ![no
 
 takes inputs from an ignition panel and on the final switch press, send a wake on lan packet to startup the PC.
 
-The ignition panel looks something like this ![igniton panel](https://i.imgur.com/HezUzRw.jpg)
-![igniton panel2](https://i.imgur.com/JDkIAPW.jpg)
+The ignition panel looks something like this ![igniton panel](https://i.imgur.com/JDkIAPW.jpg)
+![igniton panel2](https://i.imgur.com/HezUzRw.jpg)
 you get the idea. It's for race cars, all the better for our end use. 
 
 **A note on the ignition module:** 
