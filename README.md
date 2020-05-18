@@ -34,6 +34,9 @@ I refer to "pins" throughout this guide, if you're unaware of what a pin is, it'
 They sit in the breadboard and allow access to the various input/outputs of the board. **If you're unsure of what a breadboard is**, give [this](https://www.youtube.com/watch?v=6WReFkfrUIk) a watch to learn how to use a breadboard. 
 People much smarter than I have created all sorts of useful functions for the ESP8266 including the ability to connect to wifi, send wake on lan packets, and communicate with other ESP8266 devices. We will use these three functions in this project. There's no reason this project wont work with the new ESP32 module as well. 
 
+## If this is on WiFi, how secure is it?:
+A valid question. This code only creates a small server within your local network. It is not accessible by devices outside your network. It also, does not respond to any oustide inputs thus it is very secure. You can test this by trying to ping it through an external computer
+
 ## Powering the ignition panel
 - The simplest way to power your box is using the microusb input on the board. This will take 5V and draw between 1-2A of current. So if you get any cheap powerbank you should be good to go. Plugging it into your PC's USB port while uploading code etc will also be enough to power the module and troublehsoot. 
 
@@ -89,7 +92,59 @@ I have attached the code here with the name WOL_LED_SecOTA.ino. Download this an
 3. SecOTA - This is secure over the air updates. Since you're going to be sealing your module inside the project box, it might be a pain to actually wire into it every time you want to update your code. So this module just adds the ability to update code wirelessly. 
 To implement the ability to update wirelessly, simply note the hostname and password you set and then upload the code. Once uploaded, reboot using the reset switch and now, even if you're powering your module using a battery pack, if you navigate to Tools>>Port>>  you should see the nodemcu module show up with the hostname you specified. Attempting to upload code will be met with a password prompt. **Make sure that whatever code you upload to this board in the future has the OTA code in it with the same hostname and password, if the OTA code is omitted, you will lose the ability to update over the air in the future.** 
 
-### Info you need to add to the code
-The code for the most part is decently well commented and should be self explanatory. You will need to add libraries to the code to enable all the required features. Do this by hitting Ctrl+Shift+I or navigate to Skethc>>Include libraries>> Manage libraries. 
+### Adding libraries to the code:
+The code for the most part is decently well commented and should be self explanatory. You will need to add two libraries to the IDE to enable all the required features. Do this by hitting Ctrl+Shift+I or navigate to Skethc>>Include libraries>> Manage libraries. 
+The first library you need is arduinojson. Simply type arduinojson into library manager and click install.
+![library manager](https://i.imgur.com/agAoYgD.png)
+The second library you will need is the wake on lan library. **Do not search wake on lan in the manager, you will install the wrong library**. Instead, head [here](https://github.com/koenieee/WakeOnLan-ESP8266). (Props to [koenieee](https://github.com/koenieee) for making this module). Once you reach the github page, click on clone/download> then download as zip. 
+https://imgur.com/VX14qjN
+Save your zip file somewhere, there is no need to unzip this file. 
+Next, navigate to Sketch>>Include library>> Add .Zip library
+![Path](https://i.imgur.com/HO1eIOX.png).
+This will bring up a dialog box, navigate to your .zip library and select it. This will add the library to your IDE.
+Next, close the IDE and reopn the WOL_LED_SecOTA.ino file just to ensure all libraries are loaded correctly. Ensure your board is selected correctly as shown below
+![Boards](https://i.imgur.com/ZuISm7J.png)
 
+### Adding credentials to the code:
+With our libraries installed, we are almost done. The code just needs credentials to connect to wifi and to receive over the air updates. 
+**Wifi credentials:** Locate the sections shown below and replace "WIFI name here" with your 2.4Ghz wifi name. Make sure you retain the quotes. i.e. if your network name is Thebatcave, the code should look like 
 
+``const char* ssid = "Thebatcave";`` Next, do the same with your wifi password. 
+![wifi credentials](https://i.imgur.com/uXu9n4r.png)
+Hit the upload button. If you have chosen the port correctly, it should compile and beging uploading. The first time you compile may take time, be patient. 
+After uploading, your ESP8266 should be on the wifi. This can be tested by opening serial monitor: 
+![monitor] (https://i.imgur.com/jcNDv07.png).
+Set your baud rate to 115200 from the dropdown and then hit the reset button on your nodemcu board. You should see (maybe) a few .6s and then you should see the message 
+
+Connected to <your SSID>
+IP address: <your IP address>
+
+MDNS responder started
+HTTP server started
+
+If you dont see this message in the serial monitor, try hitting the reset button while the window is open, and if still no, check your SSID+password and firewall permissions. 
+To visually ensure that the module has connected to wifi and is ready to go, the code instructs the panel to flash the LED1 two times when connection to wifi has been established. So once you build your whole module, when you turn it on, after a few seconds the LED1 should flash twice.
+
+**OTA credentials:** More or less the same deal. Navigate to this section of the code:
+![OTA section](https://i.imgur.com/khnjZPa.png)
+
+and replace hostname with any name you want to give to your module and a memorable passowrd to update the module wirelessly in the future. Make sure you retain the "". Again, if you are updating code, ensure that the new code also has OTA enabled so that you don't lose this functionality. Ideally, you just want to keep adding/removing to the same code so you never risk removing OTA. One note though, serial monitor cannot be accessed if you are connecting purely wirelessly. Since there is no way of knowing if OTA is done updating, the code will flash LED1 on and off while over the air updates are happening. Wait till it finishes flashing before unplugging to avoid data corruption. 
+
+## Enable wake on LAN on your PC:
+The last step is to ensure that the PC is setup to receive wake on lan signals. This requires making changes at the BIOS level and in your ethernet adapter. There are multiple excellent guides, however, try to follow this
+https://www.howtogeek.com/70374/how-to-geek-explains-what-is-wake-on-lan-and-how-do-i-enable-it/
+and you should be successful more often than not. If your PC doesn't turn on, open up the IDE, connect your module, and fire up the serial monitor. For debug purposes, when you hit the wake on lan button, the serial monitor should print WOL_EXEC. Since this entire series is in circuit, if you are seeing this message when you press the button, it means the code is functioning as expected. The error lies in the PC's ability to receive and respond to the packets. Google your particular motherboard along with wake on lan not working and there might be MOBO specific changes that need to be made (due to powersaving implementations by different vendors).
+
+## How it gets put together and functions:
+Get a large enough project box, cut out an outline using a saw/power tools and insert the ignition panel. Scren in the panel using the provided screws. Make a hole in the side of the box and attach the button of the microUSB power cable into the hole. Connect the batter to the nodemcu via the microusb cable. This way, when you hit the button through the hole, the module will power up... saving the battery.
+The order of operations is as follows:
+1. On powerup - connect to wifi, denoted by LED1 blinking twice.
+2. Turn the ignition key - LED1,2, and 3, should light up and turn off in a wave. This powers switch 1.
+3. Turn on switch 1 - LED 1 should turn on and switch 2 is now powered.
+4. Turn on switch 2 - LED 2 should turn on and switch 3 is now powered.
+5. Turn on switch 3 - LED 3 and Start engine LEDs should turn on. Start engine aka Wake on lan button is now powered.
+6. Press Start engine button - Send the wake on LAN signal.
+
+## Future - what are these "This is the sending part comments"?
+The future work of this project involves ESP now to communicate with a slave ESP8266 inside the PC case to run LEDs and or sounds in response to the switches. Any parts of the code that are commented with ``// this is the sending part for ESP now if necessary.`` are regions that will be activated to send packets to the slave. As of now, these are not executed.
+## acknowledgements
