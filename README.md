@@ -56,13 +56,14 @@ The wired up nodemcu on a soldering breadboard ![wired up board](https://github.
 and the battery pack with a push button micro usb cable. ![Battery pack+cable](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/battery%20pack.jpg)
 
 Obviously there is very little you can get from those images, here is the circuit diagram for the project
-![Circuit_diagram](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/Circtuit%20diagram.PNG)
+![Circuit_diagram](https://i.imgur.com/wQpC1fh.png)
 **Schematic Legend**
 1. SW1 Ignition_key is the first key turn.
 2. SW2, SW3, SW4 are all the shielded toggle switches.
 3. LED1, 2, 3 are the LEDs underneath the toggle switches
 4. SW5 WOL_Button is the engine start button that functions to send the wake on lan signal.
 5. WOL_LED is the LED that lights up inside the start engine button.
+6. R are resistors of specified value in ohms
 
 **Notes about wiring**
 The wiring is such that the only way to send the wake on lan signal is to flip all the preceeding switches in that particular order. They are all in series and powered by the previous switch. All the switches are also pulled down to ground using a 10K resistor. All this means is, the output of the switch is wired to the ESP8266 *and* the ground connection. This forces the switch to stay off unless it is explicitly set to on. **If you don't have these resistors, then really weird shit will happen** where the switches wont know if they're on or not. The actual explanation is that, the esp8266 works on very low currents, so low that, the electromagnetic induction produced in the wires from just random radiowaves, hands waving, etc will generate enough current for the pins to register an input and think that the switch is active. To avoid all these, we run the output to ground through a resistor so that any tiny charges that develop in the wires are all fed to ground. However, when the switch is properly activated, the current will rather flow down the path of least resistance to the chip and register an actual *active* state than force its way through a heavy 10K resistor to reach ground.
@@ -161,3 +162,6 @@ The future work of this project involves ESP now to communicate with a slave ESP
 3. [keoniee](https://github.com/koenieee) for wake on lan library and initial code.
 4. [Good ol' google-fu](https://www.google.com/)
 5. Ya'll for reading!
+
+## Revisions
+1. Added current limiting resistors to LEDs and updated schematic. Since packs of resistors are purchased, it should include these low value resistors as well. 
