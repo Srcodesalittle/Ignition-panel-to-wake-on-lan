@@ -65,9 +65,11 @@ Obviously there is very little you can get from those images, here is the circui
 5. WOL_LED is the LED that lights up inside the start engine button.
 6. R are resistors of specified value in ohms
 
-**Notes about wiring**
+**Notes about wiring **
 The wiring is such that the only way to send the wake on lan signal is to flip all the preceeding switches in that particular order. They are all in series and powered by the previous switch. All the switches are also pulled down to ground using a 10K resistor. All this means is, the output of the switch is wired to the ESP8266 *and* the ground connection. This forces the switch to stay off unless it is explicitly set to on. **If you don't have these resistors, then really weird shit will happen** where the switches wont know if they're on or not. The actual explanation is that, the esp8266 works on very low currents, so low that, the electromagnetic induction produced in the wires from just random radiowaves, hands waving, etc will generate enough current for the pins to register an input and think that the switch is active. To avoid all these, we run the output to ground through a resistor so that any tiny charges that develop in the wires are all fed to ground. However, when the switch is properly activated, the current will rather flow down the path of least resistance to the chip and register an actual *active* state than force its way through a heavy 10K resistor to reach ground.
 All of that to say - use ground resistors on your switches. They will save you a lot of pain.
+
+Also, as of this version of the guide, I have added current limiting resistors in series with the LEDs based on useful feedback from the readers of this guide. Although I didn't have any troubles feeding current directly, it is entirely possible you might burn out your LEDs. So it's safe to probably add these limiting resistors.
 
 I chose these pins on the nodemcu board since not all pins are accessible for input output, some are reserved for clocks and such. Here is the pinout diagram
 ![pinout](https://cdn.instructables.com/FJC/J4AP/JH8JBTHA/FJCJ4APJH8JBTHA.LARGE.jpg)
