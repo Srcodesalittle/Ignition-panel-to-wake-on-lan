@@ -109,17 +109,17 @@ The second library you will need is the wake on lan library. **Do not search wak
 
 Save your zip file somewhere, there is no need to unzip this file. 
 Next, navigate to Sketch>>Include library>> Add .Zip library
-![Path]().
+![Path](https://i.imgur.com/eIUYBB4.png).
 This will bring up a dialog box, navigate to your .zip library and select it. This will add the library to your IDE.
 Next, close the IDE and reopn the WOL_LED_SecOTA.ino file just to ensure all libraries are loaded correctly. Ensure your board is selected correctly as shown below
-![Boards]()
+![Boards](https://i.imgur.com/r80XHP0.png)
 
 ### Adding credentials to the code:
 With our libraries installed, we are almost done. The code just needs credentials to connect to wifi and to receive over the air updates. 
 **Wifi credentials:** Locate the sections shown below and replace "WIFI name here" with your 2.4Ghz wifi name. Make sure you retain the quotes. i.e. if your network name is Thebatcave, the code should look like 
 
 ``const char* ssid = "Thebatcave";`` Next, do the same with your wifi password. 
-![wifi credentials]()
+![wifi credentials](https://i.imgur.com/U6MSKSO.png)
 Hit the upload button. If you have chosen the port correctly, it should compile and beging uploading. The first time you compile may take time, be patient. 
 After uploading, your ESP8266 should be on the wifi. This can be tested by opening serial monitor: 
 ![monitor](https://i.imgur.com/jcNDv07.png).
