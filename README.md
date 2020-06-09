@@ -56,7 +56,8 @@ The wired up nodemcu on a soldering breadboard ![wired up board](https://github.
 and the battery pack with a push button micro usb cable. ![Battery pack+cable](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/battery%20pack.jpg)
 
 Obviously there is very little you can get from those images, here is the circuit diagram for the project
-![Circuit_diagram](https://i.imgur.com/wQpC1fh.png)
+![Circuit_diagram]() There is a mistake in the circuit diagram as pointed out by a builder. **The WOL button has to connect to D4, not S2 as shown in the schematic. I will update the schematic soon**
+
 **Schematic Legend**
 1. SW1 Ignition_key is the first key turn.
 2. SW2, SW3, SW4 are all the shielded toggle switches.
