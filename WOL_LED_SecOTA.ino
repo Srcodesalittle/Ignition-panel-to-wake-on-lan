@@ -25,7 +25,7 @@ MDNSResponder mdns;
 const char* ssid = "WIFI name here";
 const char* password = "WIFI password here";
 
-byte mac[] = { 0x04, 0xD9, 0xF5, 0x82, 0x70, 0xD1 };
+byte mac[] = {}; // your pc mac address here if you have trouble with your Wake on lan
 //Defining switch pins//
 int igntion_key = 14; // D5(gpio14)
 int toggle_1 = 12; // D6(gpio12)
