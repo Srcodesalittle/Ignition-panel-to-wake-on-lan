@@ -1,12 +1,4 @@
 
-
-/*********
-  Rui Santos
-  Complete project details at http://randomnerdtutorials.com
-  adapted for WOL and LED. This is the sending module attached to the ignition panel.
-  Refer to circuit diagram titled ignition panel.
-*********/
-
 #include <ESP8266WiFi.h>
 #include <WiFiClient.h>
 #include <ESP8266WebServer.h>
