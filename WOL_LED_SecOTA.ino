@@ -25,7 +25,7 @@ MDNSResponder mdns;
 const char* ssid = "WIFI name here";
 const char* password = "WIFI password here";
 
-byte mac[] = {}; // your pc mac address here
+byte mac[] = { your pc mac address here}; //your pc mac address in the format specified in readme
 //Defining switch pins//
 int igntion_key = 14; // D5(gpio14)
 int toggle_1 = 12; // D6(gpio12)
