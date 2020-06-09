@@ -139,6 +139,10 @@ To visually ensure that the module has connected to wifi and is ready to go, the
 
 and replace hostname with any name you want to give to your module and a memorable passowrd to update the module wirelessly in the future. Make sure you retain the "". Again, if you are updating code, ensure that the new code also has OTA enabled so that you don't lose this functionality. Ideally, you just want to keep adding/removing to the same code so you never risk removing OTA. One note though, serial monitor cannot be accessed if you are connecting purely wirelessly. Since there is no way of knowing if OTA is done updating, the code will flash LED1 on and off while over the air updates are happening. Wait till it finishes flashing before unplugging to avoid data corruption. 
 
+**PC MAC address**
+Navigate to byte mac[]  in the code.
+Enter your ethernet mac address within the {} in the format of 0xA, 0xB, 0xC, 0xD, 0xE, 0xF if your ethernet mac address is  A-B-C-D-E-F. 
+
 ## Enable wake on LAN on your PC:
 The last step is to ensure that the PC is setup to receive wake on lan signals. This requires making changes at the BIOS level and in your ethernet adapter. There are multiple excellent guides, however, try to follow this
 https://www.howtogeek.com/70374/how-to-geek-explains-what-is-wake-on-lan-and-how-do-i-enable-it/
