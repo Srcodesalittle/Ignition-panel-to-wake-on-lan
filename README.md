@@ -56,7 +56,7 @@ The wired up nodemcu on a soldering breadboard ![wired up board](https://github.
 and the battery pack with a push button micro usb cable. ![Battery pack+cable](https://github.com/Srcodesalittle/Ignition-panel-to-wake-on-lan/blob/master/battery%20pack.jpg)
 
 Obviously there is very little you can get from those images, here is the circuit diagram for the project
-![Circuit_diagram]() There is a mistake in the circuit diagram as pointed out by a builder. **The WOL button has to connect to D4, not S2 as shown in the schematic. I will update the schematic soon**
+![Circuit_diagram](https://i.imgur.com/lUpHutt.png) 
 
 **Schematic Legend**
 1. SW1 Ignition_key is the first key turn.
@@ -165,6 +165,8 @@ The future work of this project involves ESP now to communicate with a slave ESP
 3. [keoniee](https://github.com/koenieee) for wake on lan library and initial code.
 4. [Good ol' google-fu](https://www.google.com/)
 5. Ya'll for reading!
+6. Everyone who suggested changes.
 
 ## Revisions
 1. Added current limiting resistors to LEDs and updated schematic. Since packs of resistors are purchased, it should include these low value resistors as well. 
+2. Redid the circuit diagram to accurately reflect WOL button feeding into pin D4. Also took opportunity to re-do circuit diagram to be more readable and less chicken-scratch. Major updates, so revised schematic to 2.0.
